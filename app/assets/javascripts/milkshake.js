@@ -27,21 +27,21 @@ var milk = (function(){
      */
 
     var req = new XMLHttpRequest();
-    // req.open("GET", "Class.js", false); req.send(); eval(req.responseText);
-    // req.open("GET", "Shaker.js", false); req.send(); eval(req.responseText);
-    // req.open("GET", "Music.js", false); req.send(); eval(req.responseText);
-    // req.open("GET", "HTML5Audio.js", false); req.send(); eval(req.responseText);
-    // req.open("GET", "SoundCloudAudio.js", false); req.send(); eval(req.responseText);
-    // req.open("GET", "Renderer.js", false); req.send(); eval(req.responseText);
-    // req.open("GET", "Renderable.js", false); req.send(); eval(req.responseText);
-    // req.open("GET", "RenderItemMatcher.js", false); req.send(); eval(req.responseText);
-    // req.open("GET", "RenderItemMergeFunction.js", false); req.send(); eval(req.responseText);
-    // req.open("GET", "Variables.js", false); req.send(); eval(req.responseText);
-    // req.open("GET", "MilkDropPreset.js", false); req.send(); eval(req.responseText);
-    // req.open("GET", "PerPixelMesh.js", false); req.send(); eval(req.responseText);
-    // req.open("GET", "PipelineContext.js", false); req.send(); eval(req.responseText);
-    // req.open("GET", "TimeKeeper.js", false); req.send(); eval(req.responseText);
-    // req.open("GET", "Presets.js", false); req.send(); eval(req.responseText);
+    req.open("GET", "assets/Class.js", false); req.send(); eval(req.responseText);
+    req.open("GET", "assets/Shaker.js", false); req.send(); eval(req.responseText);
+    req.open("GET", "assets/Music.js", false); req.send(); eval(req.responseText);
+    req.open("GET", "assets/HTML5Audio.js", false); req.send(); eval(req.responseText);
+    req.open("GET", "assets/SoundCloudAudio.js", false); req.send(); eval(req.responseText);
+    req.open("GET", "assets/Renderer.js", false); req.send(); eval(req.responseText);
+    req.open("GET", "assets/Renderable.js", false); req.send(); eval(req.responseText);
+    req.open("GET", "assets/RenderItemMatcher.js", false); req.send(); eval(req.responseText);
+    req.open("GET", "assets/RenderItemMergeFunction.js", false); req.send(); eval(req.responseText);
+    req.open("GET", "assets/Variables.js", false); req.send(); eval(req.responseText);
+    req.open("GET", "assets/MilkDropPreset.js", false); req.send(); eval(req.responseText);
+    req.open("GET", "assets/PerPixelMesh.js", false); req.send(); eval(req.responseText);
+    req.open("GET", "assets/PipelineContext.js", false); req.send(); eval(req.responseText);
+    req.open("GET", "assets/TimeKeeper.js", false); req.send(); eval(req.responseText);
+    req.open("GET", "assets/Presets.js", false); req.send(); eval(req.responseText);
  
 
     /* 
