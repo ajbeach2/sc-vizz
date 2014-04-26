@@ -20,49 +20,49 @@
  */
 
 var RenderItemMergeFunction = Class.extend({
-	init: function () {
+    init: function() {
 
-	},
+    },
 
-	typeIdPair: function() {
-	    return 0;
-	}
-    });
+    typeIdPair: function() {
+        return 0;
+    }
+});
 
 var RenderItemMerge = RenderItemMergeFunction.extend({
-	init: function () {
+    init: function() {
 
-	},
+    },
 
-	supported: function () {
-	    return false;
-	},
+    supported: function() {
+        return false;
+    },
 
-	typeIdPair: function() {
-	    return ["",""];
-	},
+    typeIdPair: function() {
+        return ["", ""];
+    },
 
-    });
+});
 
 var ShapeMerge = RenderItemMerge.extend({
-	init: function() {
+    init: function() {
 
-	}
-    });
+    }
+});
 
 var BorderMerge = RenderItemMerge.extend({
-	init: function() {
+    init: function() {
 
-	}
-    });
+    }
+});
 
 var MasterRenderItemMerge = RenderItemMerge.extend({
-	init: function () {
-	    this.mergeFunctionMap = {};
-	},
+    init: function() {
+        this.mergeFunctionMap = {};
+    },
 
-	add: function(fun) {
-	    this.mergeFunctionMap[fun.typeIdPair()] = fun;
-	}
+    add: function(fun) {
+        this.mergeFunctionMap[fun.typeIdPair()] = fun;
+    }
 
-    });
+});
