@@ -20,7 +20,7 @@
  */
 
 define(
-    "Music"
+    "Music",
     function() {
         function Music() {
             this.vol_instant = 0;
