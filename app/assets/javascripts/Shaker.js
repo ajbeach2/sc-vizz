@@ -63,8 +63,8 @@ define(
             this.timeKeeper.StartPreset();
         }
 
-         Shaker.prototype = {
-             reset: function() {
+        Shaker.prototype = {
+            reset: function() {
                 this.mspf = 0;
                 this.timed = 0;
                 this.timestart = 0;
@@ -80,7 +80,7 @@ define(
                 this.pipelineContext.frame = this.timeKeeper.PresetFrameA();
                 this.pipelineContext.progress = this.timeKeeper.PresetProgressA();
                 this.music.detectFromSamples();
- 
+
                 /*if (this.renderer.noSwitch == false && !this.havePresets()) {
                 if (this.timeKeeper.PresetProgressA() >= 1.0 && !this.timeKeeper.IsSmoothing())
                     this.selectNext(false);
