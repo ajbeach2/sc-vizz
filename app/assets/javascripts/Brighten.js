@@ -1,4 +1,4 @@
-define('Brighten', ["Filter"], functon(Filter) {
+define('Brighten', ["Filter"], function(Filter) {
 
     Brighten.prototype = new Filter();
     Brighten.constructor = Brighten;
