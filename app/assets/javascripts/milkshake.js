@@ -24,7 +24,6 @@ require([
     "assets/Class.js",
     "assets/Shaker.js",
     "assets/Music.js",
-    "assets/HTML5Audio.js",
     "assets/SoundCloudAudio.js",
     "assets/Renderer.js",
     "assets/Renderable.js",
