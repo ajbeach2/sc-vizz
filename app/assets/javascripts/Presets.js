@@ -1,8 +1,5 @@
 define('Presets', function() {
 
-
-
-
     var Presets = {};
 
     Presets["Aderrasi - Blender.milk"] = {
