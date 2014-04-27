@@ -1,5 +1,7 @@
 define(
-    "Shaker", ["PipelineContext", "Timekeeper", "Music", "Renderer", "MilkdropPreset", "RenderItemMatcher", "ShapeMerge", "BorderMerge", "Presets"],
+    "Shaker", ["PipelineContext", "Timekeeper", "Music", "Renderer",
+        "MilkdropPreset", "RenderItemMatcher", "ShapeMerge", "BorderMerge", "Presets"
+    ],
 
     function(PipelineContext, Timekeeper, Music, Renderer, MilkdropPreset, RenderItemMatcher, ShapeMerge, BorderMerge, Presets) {
         function Shaker() {
