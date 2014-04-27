@@ -19,50 +19,17 @@
  *
  */
 
-var RenderItemMergeFunction = Class.extend({
-    init: function() {
+define("RenderItemMergeFunction", function() {
 
-    },
-
-    typeIdPair: function() {
-        return 0;
-    }
-});
-
-var RenderItemMerge = RenderItemMergeFunction.extend({
-    init: function() {
-
-    },
-
-    supported: function() {
-        return false;
-    },
-
-    typeIdPair: function() {
-        return ["", ""];
-    },
-
-});
-
-var ShapeMerge = RenderItemMerge.extend({
-    init: function() {
+    function RenderItemMergeFunction() {
 
     }
-});
 
-var BorderMerge = RenderItemMerge.extend({
-    init: function() {
-
-    }
-});
-
-var MasterRenderItemMerge = RenderItemMerge.extend({
-    init: function() {
-        this.mergeFunctionMap = {};
-    },
-
-    add: function(fun) {
-        this.mergeFunctionMap[fun.typeIdPair()] = fun;
+    RenderItemMergeFunction.prototype = {
+        typeIdPair: function() {
+            return 0;
+        }
     }
 
+    return RenderItemMergeFunction;
 });
