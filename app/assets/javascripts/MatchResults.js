@@ -1,7 +1,7 @@
 define(
     "MatchResults",
-    function(MatchResults) {
-        function MatchResults(){
+    function() {
+        function MatchResults() {
             this.unmatchedLeft = [];
             this.unmatchedRight = [];
         }
