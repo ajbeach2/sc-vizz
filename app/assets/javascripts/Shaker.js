@@ -1,7 +1,7 @@
 define(
-    "Shaker", ["PipelineContext", "Timekeeper", "Music", "Renderer", "MilkdropPreset", "RenderItemMatcher"],
+    "Shaker", ["PipelineContext", "Timekeeper", "Music", "Renderer", "MilkdropPreset", "RenderItemMatcher", "ShapeMerge", "BorderMerge", "Presets"],
 
-    function(PipelineContext, Timekeeper, Music, Renderer, MilkdropPreset, RenderItemMatcher) {
+    function(PipelineContext, Timekeeper, Music, Renderer, MilkdropPreset, RenderItemMatcher, ShapeMerge, BorderMerge, Presets) {
         function Shaker() {
             this.settings = {
                 meshX: 32,
