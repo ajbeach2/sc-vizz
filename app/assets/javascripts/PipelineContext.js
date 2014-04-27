@@ -26,4 +26,5 @@ define("PipelineContext", function() {
         this.frame = 0;
         this.progress = 0;
     }
+    return PipelineContext;
 });
