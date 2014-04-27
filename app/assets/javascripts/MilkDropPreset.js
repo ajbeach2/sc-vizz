@@ -20,7 +20,7 @@
  */
 
 
-define("MilkdropPreset", ["PresetFrameVariablePool", "PresetPixelVariablePool",
+define("MilkDropPreset", ["PresetFrameVariablePool", "PresetPixelVariablePool",
     "Darken", "Brighten", "Solarize", "Invert", "DarkenCenter",
     "MotionVectors", "Border", "MilkdropWaveform", "RenderItem", "CustomWaveform"
 ], function(PresetFrameVariablePool, PresetPixelVariablePool,
@@ -150,7 +150,7 @@ define("MilkdropPreset", ["PresetFrameVariablePool", "PresetPixelVariablePool",
         meshy: ["gy", null, Number]
     }
 
-        function MilkdropPreset(name, preset, gx, gy) {
+        function MilkDropPreset(name, preset, gx, gy) {
             this.name = name;
             this.inputs = {};
             this.outputs = {
@@ -240,7 +240,7 @@ define("MilkdropPreset", ["PresetFrameVariablePool", "PresetPixelVariablePool",
                 }
         }
 
-    MilkdropPreset.prototype = {
+    MilkDropPreset.prototype = {
         loadParam: function(param, value) {
             if (param.toLowerCase() in OutputParamMap) {
                 var internal = OutputParamMap[param.toLowerCase()];
@@ -522,5 +522,5 @@ define("MilkdropPreset", ["PresetFrameVariablePool", "PresetPixelVariablePool",
 
     }
 
-    return MilkdropPreset;
+    return MilkDropPreset;
 });

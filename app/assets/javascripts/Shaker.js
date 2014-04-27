@@ -1,9 +1,9 @@
 define(
-    "Shaker", ["PipelineContext", "Timekeeper", "Music", "Renderer",
-        "MilkdropPreset", "RenderItemMatcher", "ShapeMerge", "BorderMerge", "Presets"
+    "Shaker", ["PipelineContext", "TimeKeeper", "Music", "Renderer",
+        "MilkDropPreset", "RenderItemMatcher", "ShapeMerge", "BorderMerge", "Presets"
     ],
 
-    function(PipelineContext, Timekeeper, Music, Renderer, MilkdropPreset, RenderItemMatcher, ShapeMerge, BorderMerge, Presets) {
+    function(PipelineContext, TimeKeeper, Music, Renderer, MilkDropPreset, RenderItemMatcher, ShapeMerge, BorderMerge, Presets) {
         function Shaker() {
             this.settings = {
                 meshX: 32,
@@ -38,7 +38,7 @@ define(
             this.presetNames = [];
             for (var presetName in Presets) {
                 this.presetNames.push(presetName);
-                Presets[presetName] = new MilkdropPreset(presetName, Presets[presetName],
+                Presets[presetName] = new MilkDropPreset(presetName, Presets[presetName],
                     this.settings.meshX, this.settings.meshY);
             }
 

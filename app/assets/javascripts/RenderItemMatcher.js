@@ -1,11 +1,11 @@
 define(
     "RenderItemMatcher", ["MatchResults"],
     function(MatchResults) {
-        function RenderItemMatcher(){
-            this.MAXIMUM_SET_SIZE: = 1000;
+        function RenderItemMatcher() {
+            this.MAXIMUM_SET_SIZE = 1000;
             this.results = new MatchResults();
             this.weights = [];
-            for (var i = 0; i < this.MAXIMUM_SET_SIZE; i++){
+            for (var i = 0; i < this.MAXIMUM_SET_SIZE; i++) {
                 this.weights.push(new Float32Array(this.MAXIMUM_SET_SIZE));
             }
         }
@@ -16,7 +16,7 @@ define(
                     var j;
                     for (j = 0; j < rhs.length; j++)
                         this.weights[i][j] = this.distanceFunction(lhs[i], rhs[j]);
-                    for (; j < lhs.length; j++){
+                    for (; j < lhs.length; j++) {
                         // TODO wtf is RenderItemDistanceMetric
                         this.weights[i][j] = RenderItemDistanceMetric.NOT_COMPARABLE_VALUE;
                     }
@@ -35,4 +35,4 @@ define(
         }
         return RenderItemMatcher;
     }
-)
+);

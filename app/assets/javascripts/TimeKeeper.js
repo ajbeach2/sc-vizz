@@ -63,7 +63,7 @@ define("TimeKeeper",
             CanHardCut: function() {
                 return ((this.currentTime - this.presetTimeA) > 3)
             },
-            k
+
             SmoothRatio: function() {
                 return (this.currentTime - this.presetTime) / this.smoothDuration;
             },
