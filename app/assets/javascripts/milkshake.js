@@ -21,23 +21,9 @@
 
 
 require([
-    "assets/Class.js",
-    "assets/Shaker.js",
-    "assets/Music.js",
-    "assets/SoundCloudAudio.js",
-    "assets/Renderer.js",
-    "assets/Renderable.js",
-    "assets/RenderItemMatcher.js",
-    "assets/RenderItemMergeFunction.js",
-    "assets/Variables.js",
-    "assets/MilkDropPreset.js",
-    "assets/PerPixelMesh.js",
-    "assets/PipelineContext.js",
-    "assets/TimeKeeper.js",
-    "assets/Presets.js",
-    "assets/gl-matrix.js"
-
-], function() {
+    "Shaker",
+    "SoundCloudAudio",
+], function(Shaker, SoundCloudAudio) {
 
 
 
