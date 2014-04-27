@@ -35,4 +35,6 @@ define("PerPixelMesh", ["MPoint", "PerPixelContext"], function(MPoint, PerPixelC
             this.p[i].y = this.p_original[i].y;
         }
     }
+
+    return PerPixelMesh;
 });

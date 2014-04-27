@@ -177,4 +177,5 @@ define('CustomWaveform', ["RenderItem"], function(RenderItem) {
 
         }
     }
+    return CustomWaveform;
 });
