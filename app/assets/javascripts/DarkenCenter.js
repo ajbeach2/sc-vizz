@@ -30,5 +30,5 @@ define('DarkenCenter', ["RenderItem", "ShapeFrameVariablePool"], function(Render
         uDrawArrays(gl.TRIANGLE_FAN, 0, 6);
     }
 
-    return DarkenCenter
+    return DarkenCenter;
 });
