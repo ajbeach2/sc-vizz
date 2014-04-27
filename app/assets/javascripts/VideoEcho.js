@@ -1,4 +1,4 @@
-define('VideoEcho', ["RenderItem"], function(RenderItem) {
+define('VideoEcho', ["RenderItem", "Orientation"], function(RenderItem, Orientation) {
         VideoEcho.prototype = new RenderItem();
         VideoEcho.constructor = VideoEcho;
 
