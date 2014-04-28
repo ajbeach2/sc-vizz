@@ -22,10 +22,10 @@
 
 define("MilkDropPreset", ["PresetFrameVariablePool", "PresetPixelVariablePool",
     "Darken", "Brighten", "Solarize", "Invert", "DarkenCenter",
-    "MotionVectors", "Border", "MilkdropWaveform", "RenderItem", "CustomWaveform"
+    "MotionVectors", "Border", "MilkdropWaveform", "RenderItem", "CustomWaveform", "Shape"
 ], function(PresetFrameVariablePool, PresetPixelVariablePool,
     Darken, Brighten, Solarize, Invert, DarkenCenter,
-    MotionVectors, Border, MilkdropWaveform, RenderItem, CustomWaveform) {
+    MotionVectors, Border, MilkdropWaveform, RenderItem, CustomWaveform, Shape) {
 
     var wFunction = function(f) {
         if (typeof f == "function")

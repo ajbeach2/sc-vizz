@@ -1,7 +1,10 @@
-define('MilkdropWaveform', ['WaveMode', 'RenderItem'], function(WaveMode, RenderItem) {
+define('MilkdropWaveform', ['WaveMode', 'RenderItem', "Milk"], function(WaveMode, RenderItem, Milk) {
 
     MilkdropWaveform.prototype = new RenderItem();
     MilkdropWaveform.constructor = MilkdropWaveform;
+
+    var milk = Milk.getInstance();
+    var gl = milk.gl;
 
     function MilkdropWaveform(literal) {
 
@@ -35,9 +38,9 @@ define('MilkdropWaveform', ['WaveMode', 'RenderItem'], function(WaveMode, Render
 
     MilkdropWaveform.prototype.Draw = function(context) {
         this.WaveformMath(context);
-        uMatrixMode(U_MODELVIEW);
-        uPushMatrix();
-        uLoadIdentity();
+        milk.uMatrixMode(milk.U_MODELVIEW);
+        milk.uPushMatrix();
+        milk.uLoadIdentity();
 
         if (this.modulateAlphaByVolume) {
             if (context.music.vol <= this.modOpacityStart) this.temp_a = 0.0;
@@ -55,36 +58,36 @@ define('MilkdropWaveform', ['WaveMode', 'RenderItem'], function(WaveMode, Render
         if (this.additive == 1) gl.blendFunc(gl.SRC_ALPHA, gl.ONE);
         else gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 
-        uTranslatef(.5, .5, 0);
-        uRotatef(this.rot, 0, 0, 1);
-        uScalef(this.aspectScale, 1.0, 1.0);
-        uTranslatef(-.5, -.5, 0);
+        milk.uTranslatef(.5, .5, 0);
+        milk.uRotatef(this.rot, 0, 0, 1);
+        milk.uScalef(this.aspectScale, 1.0, 1.0);
+        milk.uTranslatef(-.5, -.5, 0);
 
-        uEnableClientState(U_VERTEX_ARRAY);
-        uDisableClientState(U_TEXTURE_COORD_ARRAY);
-        uDisableClientState(U_COLOR_ARRAY);
+        milk.uEnableClientState(milk.U_VERTEX_ARRAY);
+        milk.uDisableClientState(milk.U_TEXTURE_COORD_ARRAY);
+        milk.uDisableClientState(milk.U_COLOR_ARRAY);
 
         gl.bindBuffer(gl.ARRAY_BUFFER, this.wavearraybuf);
         gl.bufferData(gl.ARRAY_BUFFER, this.wavearray, gl.STATIC_DRAW);
-        uVertexPointer(2, gl.FLOAT, 0, this.wavearraybuf);
+        milk.uVertexPointer(2, gl.FLOAT, 0, this.wavearraybuf);
 
         if (this.loop)
-            uDrawArrays(gl.LINE_LOOP, 0, this.samples);
+            milk.uDrawArrays(gl.LINE_LOOP, 0, this.samples);
         else
-            uDrawArrays(gl.LINE_STRIP, 0, this.samples);
+            milk.uDrawArrays(gl.LINE_STRIP, 0, this.samples);
 
 
         if (this.two_waves) {
             gl.bindBuffer(gl.ARRAY_BUFFER, this.wavearray2buf);
             gl.bufferData(gl.ARRAY_BUFFER, this.wavearray2, gl.STATIC_DRAW);
-            uVertexPointer(2, gl.FLOAT, 0, this.wavearray2buf);
+            milk.uVertexPointer(2, gl.FLOAT, 0, this.wavearray2buf);
             if (this.loop)
-                uDrawArrays(gl.LINE_LOOP, 0, this.samples);
+                milk.uDrawArrays(gl.LINE_LOOP, 0, this.samples);
             else
-                uDrawArrays(gl.LINE_STRIP, 0, this.samples);
+                milk.uDrawArrays(gl.LINE_STRIP, 0, this.samples);
         }
 
-        uPopMatrix();
+        milk.uPopMatrix();
 
     }
 
@@ -140,9 +143,9 @@ define('MilkdropWaveform', ['WaveMode', 'RenderItem'], function(WaveMode, Render
                 wave_r_switch = this.r / this.g;
                 wave_g_switch = 1.0;
             }
-            uColor4f(wave_r_switch, wave_g_switch, wave_b_switch, this.temp_a * this.masterAlpha);
+            milk.uColor4f(wave_r_switch, wave_g_switch, wave_b_switch, this.temp_a * this.masterAlpha);
         } else {
-            uColor4f(this.r, this.g, this.b, this.temp_a * this.masterAlpha);
+            milk.uColor4f(this.r, this.g, this.b, this.temp_a * this.masterAlpha);
         }
     }
 

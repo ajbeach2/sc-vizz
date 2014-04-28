@@ -5,9 +5,11 @@ define('MasterRenderItemMerge', ["RenderItemMerge"], function(RenderItemMerge) {
 
     function MasterRenderItemMerge() {
 
+        this.mergeFunctionMap = {};
     }
 
     MasterRenderItemMerge.prototype.add = function(fun) {
+
         this.mergeFunctionMap[fun.typeIdPair()] = fun;
     }
 

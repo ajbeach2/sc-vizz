@@ -1,6 +1,9 @@
-define('VideoEcho', ["RenderItem", "Orientation"], function(RenderItem, Orientation) {
+define('VideoEcho', ["RenderItem", "Orientation", "Milk"], function(RenderItem, Orientation, Milk) {
         VideoEcho.prototype = new RenderItem();
         VideoEcho.constructor = VideoEcho;
+
+        var milk = Milk.getInstance()
+        var gl = milk.gl;
 
         function VideoEcho(literal) {
             this.a = 0;
@@ -19,27 +22,27 @@ define('VideoEcho', ["RenderItem", "Orientation"], function(RenderItem, Orientat
 
         VideoEcho.prototype.Draw = function(context) {
 
-            uEnableClientState(U_VERTEX_ARRAY);
-            uDisableClientState(U_COLOR_ARRAY);
-            uEnableClientState(U_TEXTURE_COORD_ARRAY);
+            milk.uEnableClientState(U_VERTEX_ARRAY);
+            milk.uDisableClientState(U_COLOR_ARRAY);
+            milk.uEnableClientState(U_TEXTURE_COORD_ARRAY);
 
             gl.bindBuffer(gl.ARRAY_BUFFER, this.pointsbuf);
             gl.bufferData(gl.ARRAY_BUFFER, this.points, gl.STATIC_DRAW);
-            uVertexPointer(2, gl.FLOAT, 0, this.pointsbuf);
+            milk.uVertexPointer(2, gl.FLOAT, 0, this.pointsbuf);
 
             gl.bindBuffer(gl.ARRAY_BUFFER, this.texbuf);
             gl.bufferData(gl.ARRAY_BUFFER, this.tex, gl.STATIC_DRAW);
-            uTexCoordPointer(2, gl.FLOAT, 0, this.tex);
+            milk.uTexCoordPointer(2, gl.FLOAT, 0, this.tex);
 
             gl.enable(gl.BLEND);
             gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 
-            uMatrixMode(U_TEXTURE);
+            milk.uMatrixMode(U_TEXTURE);
 
-            uColor4f(1.0, 1.0, 1.0, this.a * this.masterAlpha);
-            uTranslatef(.5, .5, 0);
-            uScalef(1.0 / this.zoom, 1.0 / this.zoom, 1);
-            uTranslatef(-.5, -.5, 0);
+            milk.uColor4f(1.0, 1.0, 1.0, this.a * this.masterAlpha);
+            milk.uTranslatef(.5, .5, 0);
+            milk.uScalef(1.0 / this.zoom, 1.0 / this.zoom, 1);
+            milk.uTranslatef(-.5, -.5, 0);
 
             var flipx = 1,
                 flipy = 1;
@@ -73,10 +76,10 @@ define('VideoEcho', ["RenderItem", "Orientation"], function(RenderItem, Orientat
 
             gl.bindBuffer(gl.ARRAY_BUFFER, this.pointsFlipbuf);
             gl.bufferData(gl.ARRAY_BUFFER, this.pointsFlip, gl.STATIC_DRAW);
-            uVertexPointer(2, gl.FLOAT, 0, this.pointsFlipbuf);
-            uDrawArrays(gl.TRIANGLE_FAN, 0, 4);
+            milk.uVertexPointer(2, gl.FLOAT, 0, this.pointsFlipbuf);
+            milk.uDrawArrays(gl.TRIANGLE_FAN, 0, 4);
 
-            uDisableClientState(U_TEXTURE_COORD_ARRAY);
+            milk.uDisableClientState(milk.U_TEXTURE_COORD_ARRAY);
             gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 
         }

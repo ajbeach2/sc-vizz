@@ -1,4 +1,7 @@
-define("RenderTarget", function() {
+define("RenderTarget", ["Milk"], function(Milk) {
+
+    var milk = Milk.getInstance();
+    var gl = milk.gl;
 
     function RenderTarget(texsize, width, height) {
         var mindim = 0;

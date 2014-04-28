@@ -18,7 +18,7 @@ define("SoundCloudAudio",
             var smjs = document.createElement("script");
             smjs.type = "text/javascript";
 
-            milk.soundCloudJSONCallback = this.gotStreamURL;
+            soundCloudJSONCallback = this.gotStreamURL;
             smjs.onload = function() {
                 soundManager.url = "SoundManager2/";
                 soundManager.usePolicyFile = true;
@@ -71,7 +71,7 @@ define("SoundCloudAudio",
                                     left[i] = parseFloat(left[i]);
                                     right[i] = parseFloat(right[i]);
                                 }
-                            shaker.music.addPCM(left, right);
+                                shaker.music.addPCM(left, right);
                             }
                         },
                         onplay: function() {

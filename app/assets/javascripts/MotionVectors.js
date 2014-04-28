@@ -1,6 +1,9 @@
-define('MotionVectors', ['RenderItem'], function(RenderItem) {
+define('MotionVectors', ['RenderItem', 'Milk'], function(RenderItem, Milk) {
     MotionVectors.prototype = new RenderItem();
     MotionVectors.constructor = MotionVectors;
+
+    var milk = Milk.getInstance();
+    var gl = milk.gl;
 
     function MotionVectors(literal) {
         this.r = 0.0;
@@ -19,9 +22,9 @@ define('MotionVectors', ['RenderItem'], function(RenderItem) {
     }
 
     MotionVectors.prototype.Draw = function() {
-        uEnableClientState(U_VERTEX_ARRAY);
-        uDisableClientState(U_TEXTURE_COORD_ARRAY);
-        uDisableClientState(U_COLOR_ARRAY);
+        milk.uEnableClientState(milk.U_VERTEX_ARRAY);
+        milk.uDisableClientState(milk.U_TEXTURE_COORD_ARRAY);
+        milk.uDisableClientState(milk.U_COLOR_ARRAY);
 
         var intervalx = 1.0 / this.x_num;
         var intervaly = 1.0 / this.y_num;
@@ -29,8 +32,8 @@ define('MotionVectors', ['RenderItem'], function(RenderItem) {
         gl.enable(gl.BLEND);
         gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 
-        uPointSize(this.length);
-        uColor4f(this.r, this.g, this.b, this.a * this.masterAlpha);
+        milk.uPointSize(this.length);
+        milk.uColor4f(this.r, this.g, this.b, this.a * this.masterAlpha);
 
         if (this.x_num + this.y_num < 600) {
             var size = Math.floor(this.x_num * this.y_num);
@@ -47,8 +50,8 @@ define('MotionVectors', ['RenderItem'], function(RenderItem) {
                     }
                 gl.bindBuffer(gl.ARRAY_BUFFER, this.pointsbuf);
                 gl.bufferData(gl.ARRAY_BUFFER, this.points, gl.STATIC_DRAW);
-                uVertexPointer(2, gl.FLOAT, 0, this.pointsbuf);
-                uDrawArrays(gl.POINTS, 0, size);
+                milk.uVertexPointer(2, gl.FLOAT, 0, this.pointsbuf);
+                milk.uDrawArrays(gl.POINTS, 0, size);
             }
         }
     }

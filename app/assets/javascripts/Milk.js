@@ -12,12 +12,20 @@ define("Milk", function() {
         this.canvas.width = window.innerWidth;
         this.canvas.height = window.innerHeight;
 
-        this.gl;
+        this.gl = this.canvas.getContext("experimental-webgl", {
+            alpha: false,
+            depth: false,
+            stencil: false,
+            antialias: false,
+            premultipliedAlpha: true,
+            preserveDrawingBuffer: false,
+        });
+
         this.U_PROJECTION = 0;
         this.U_MODELVIEW = 1;
         this.U_TEXTURE = 2;
 
-        thisU_VERTEX_ARRAY = 0;
+        this.U_VERTEX_ARRAY = 0;
         this.U_TEXTURE_COORD_ARRAY = 1;
         this.U_COLOR_ARRAY = 2;
 
@@ -30,7 +38,7 @@ define("Milk", function() {
         this.mvStack = [];
         this.prStack = [];
         this.txStack = [];
-        this.activeStack = prStack;
+        this.activeStack = this.prStack;
         this.enablestex = false;
         this.enablevco = false;
         this.upointsize = 1.0;
@@ -60,16 +68,7 @@ define("Milk", function() {
 
         initGL: function(callback) {
 
-            this.gl = this.canvas.getContext("experimental-webgl", {
-                alpha: false,
-                depth: false,
-                stencil: false,
-                antialias: false,
-                premultipliedAlpha: true,
-                preserveDrawingBuffer: false,
-            });
-
-            var vertexShader = loadShader(gl.VERTEX_SHADER,
+            var vertexShader = this.loadShader(this.gl.VERTEX_SHADER,
                 "precision mediump float; \
           attribute vec4 a_position; \
           attribute vec4 a_texCoord; \
@@ -91,7 +90,7 @@ define("Milk", function() {
             gl_PointSize = u_pointsize; \
           }");
 
-            var fragmentShader = loadShader(gl.FRAGMENT_SHADER,
+            var fragmentShader = this.loadShader(this.gl.FRAGMENT_SHADER,
                 "precision mediump float; \
           varying vec4 v_texCoord; \
           uniform sampler2D s_texture; \
@@ -108,7 +107,7 @@ define("Milk", function() {
             this.gl.attachShader(shaderProgram, vertexShader);
             this.gl.attachShader(shaderProgram, fragmentShader);
             this.gl.linkProgram(shaderProgram);
-            if (!gl.getProgramParameter(shaderProgram, this.gl.LINK_STATUS))
+            if (!this.gl.getProgramParameter(shaderProgram, this.gl.LINK_STATUS))
                 throw Error("Unable to initialize the shader program.");
             this.gl.useProgram(shaderProgram);
 
@@ -116,7 +115,7 @@ define("Milk", function() {
             this.colorPos = this.gl.getAttribLocation(shaderProgram, "a_color");
             this.texCoordPos = this.gl.getAttribLocation(shaderProgram, "a_texCoord");
             this.ucolorloc = this.gl.getUniformLocation(shaderProgram, "u_color");
-            thist.stextureloc = this.gl.getUniformLocation(shaderProgram, "s_texture");
+            this.stextureloc = this.gl.getUniformLocation(shaderProgram, "s_texture");
             this.upointsizeloc = this.gl.getUniformLocation(shaderProgram, "u_pointsize");
             this.mvpmatrixloc = this.gl.getUniformLocation(shaderProgram, "mvp_matrix");
             this.txmatrixloc = this.gl.getUniformLocation(shaderProgram, "tx_matrix");
@@ -124,23 +123,23 @@ define("Milk", function() {
             this.enablevcoloc = this.gl.getUniformLocation(shaderProgram, "enable_v_color");
 
             var that = this;
-            for (var i = 0; i < texture_list.length; i++) {
+            for (var i = 0; i < this.texture_list.length; i++) {
                 var img = new Image();
                 img.tex = this.gl.createTexture();
                 img.onload = function() {
                     that.gl.bindTexture(that.gl.TEXTURE_2D, this.tex);
-                    that.gl.texImage2D(that.gl.TEXTURE_2D, 0, that.gl.RGBA, that.gl.RGBA, this.gl.UNSIGNED_BYTE, this);
+                    that.gl.texImage2D(that.gl.TEXTURE_2D, 0, that.gl.RGBA, that.gl.RGBA, that.gl.UNSIGNED_BYTE, this);
                     that.gl.texParameteri(that.gl.TEXTURE_2D, that.gl.TEXTURE_MAG_FILTER, that.gl.LINEAR);
                     that.gl.texParameteri(that.gl.TEXTURE_2D, that.gl.TEXTURE_MIN_FILTER, that.gl.LINEAR);
                     that.gl.texParameteri(that.gl.TEXTURE_2D, that.gl.TEXTURE_WRAP_S, that.gl.CLAMP_TO_EDGE);
                     that.gl.texParameteri(that.gl.TEXTURE_2D, that.gl.TEXTURE_WRAP_T, that.gl.CLAMP_TO_EDGE);
                     that.gl.bindTexture(that.gl.TEXTURE_2D, null);
-                    textures[this.src.split("/").pop()] = this.tex;
-                    texloads += 1;
-                    if (texloads == texture_list.length)
+                    that.textures[this.src.split("/").pop()] = this.tex;
+                    that.texloads += 1;
+                    if (that.texloads == that.texture_list.length)
                         callback();
                 };
-                img.src = texture_list[i];
+                img.src = this.texture_list[i];
             }
 
         },
@@ -149,7 +148,7 @@ define("Milk", function() {
             shader = this.gl.createShader(type);
             this.gl.shaderSource(shader, source);
             this.gl.compileShader(shader);
-            if (!this.gl.getShaderParameter(shader, gl.COMPILE_STATUS))
+            if (!this.gl.getShaderParameter(shader, this.gl.COMPILE_STATUS))
                 throw Error("An error occurred compiling the shaders: " + this.gl.getShaderInfoLog(shader));
             return shader;
         },
@@ -308,7 +307,7 @@ define("Milk", function() {
         },
 
         uVertexPointer: function(size, type, stride, buf) {
-            this.gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+            this.gl.bindBuffer(this.gl.ARRAY_BUFFER, buf);
             this.gl.vertexAttribPointer(this.vertexPos, size, type, false, size * 4, 0);
 
             this.gl.enableVertexAttribArray(this.vertexPos);
@@ -351,7 +350,7 @@ define("Milk", function() {
             this.gl.uniform1i(this.stextureloc, 0);
             this.multiply(this.mvpMatrix, this.mvMatrix, this.prMatrix);
             this.gl.uniformMatrix4fv(this.mvpmatrixloc, false, this.mvpMatrix);
-            gl.uniformMatrix4fv(this.txmatrixloc, false, this.txMatrix);
+            this.gl.uniformMatrix4fv(this.txmatrixloc, false, this.txMatrix);
             if (!this.enablestex)
                 this.gl.disableVertexAttribArray(this.texCoordPos);
             if (!this.enablevco)

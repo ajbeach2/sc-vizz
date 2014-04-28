@@ -1,6 +1,11 @@
-define('CustomWaveform', ["RenderItem"], function(RenderItem) {
+define('CustomWaveform', ["RenderItem", "Milk", "WaveFrameVariablePool",
+    "WavePointVariablePool"
+], function(RenderItem, Milk, WaveFrameVariablePool, WavePointVariablePool) {
     CustomWaveform.prototype = new RenderItem();
     CustomWaveform.constructor = CustomWaveform;
+
+    var milk = Milk.getInstance();
+    var gl = milk.gl;
 
     function CustomWaveform(literal, initialQs) {
         this.r = 0;
@@ -132,7 +137,7 @@ define('CustomWaveform', ["RenderItem"], function(RenderItem) {
 
             if (this.thick) {
                 gl.lineWidth(context.texsize <= 512 ? 2 : 2 * context.texsize / 512);
-                uPointSize(context.texsize <= 512 ? 2 : 2 * context.texsize / 512);
+                milk.uPointSize(context.texsize <= 512 ? 2 : 2 * context.texsize / 512);
             } else uPointSize(context.texsize <= 512 ? 1 : context.texsize / 512);
 
             context.music.getPCM(this.waveDataL, this.samples, 0, this.spectrum, this.smoothing);
@@ -155,22 +160,22 @@ define('CustomWaveform', ["RenderItem"], function(RenderItem) {
                 this.p[i * 2 + 1] = -(this.y_mesh[i] - 1);
             }
 
-            uEnableClientState(U_VERTEX_ARRAY);
-            uEnableClientState(U_COLOR_ARRAY);
-            uDisableClientState(U_TEXTURE_COORD_ARRAY);
+            milk.uEnableClientState(U_VERTEX_ARRAY);
+            milk.uEnableClientState(U_COLOR_ARRAY);
+            milk.uDisableClientState(U_TEXTURE_COORD_ARRAY);
 
             gl.bindBuffer(gl.ARRAY_BUFFER, this.pbuf);
             gl.bufferData(gl.ARRAY_BUFFER, this.p, gl.STATIC_DRAW);
-            uVertexPointer(2, gl.FLOAT, 0, this.pbuf);
+            milk.uVertexPointer(2, gl.FLOAT, 0, this.pbuf);
 
             gl.bindBuffer(gl.ARRAY_BUFFER, this.colorbuf);
             gl.bufferData(gl.ARRAY_BUFFER, this.colors, gl.STATIC_DRAW);
-            uColorPointer(4, gl.FLOAT, 0, this.colorbuf);
+            milk.uColorPointer(4, gl.FLOAT, 0, this.colorbuf);
 
             if (this.dots) uDrawArrays(gl.POINTS, 0, this.samples);
             else uDrawArrays(gl.LINE_STRIP, 0, this.samples);
 
-            uPointSize(context.texsize < 512 ? 1 : context.texsize / 512);
+            milk.uPointSize(context.texsize < 512 ? 1 : context.texsize / 512);
             gl.lineWidth(context.texsize < 512 ? 1 : context.texsize / 512);
 
             gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);

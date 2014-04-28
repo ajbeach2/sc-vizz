@@ -1,6 +1,11 @@
-define('Filter', ["RenderItem"], function(RenderItem) {
+define('Filter', ["RenderItem", "Milk"], function(RenderItem, Milk) {
     Filter.prototype = new RenderItem();
     Filter.constructor = Filter;
+
+    var milk = Milk.getInstance();
+
+    console.log(milk);
+    var gl = milk.gl;
 
     function Filter(literal) {
         RenderItem.call(this, literal);

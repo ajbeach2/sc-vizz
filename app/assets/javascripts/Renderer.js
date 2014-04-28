@@ -1,4 +1,7 @@
-define("Renderer", ["PerPixelMesh", "RenderTarget"], function(PerPixelMesh, RenderTarget) {
+define("Renderer", ["PerPixelMesh", "RenderTarget", "Milk"], function(PerPixelMesh, RenderTarget, Milk) {
+
+    var milk = Milk.getInstance();
+    var gl = milk.gl;
 
     function Renderer(width, height, gx, gy, texsize, music) {
         this.presetName = "None";
@@ -48,15 +51,15 @@ define("Renderer", ["PerPixelMesh", "RenderTarget"], function(PerPixelMesh, Rend
             this.renderTarget.lock();
             gl.viewport(0, 0, this.renderTarget.texsize, this.renderTarget.texsize);
 
-            uEnableClientState(U_TEXTURE_COORD_ARRAY);
+            milk.uEnableClientState(milk.U_TEXTURE_COORD_ARRAY);
 
-            uMatrixMode(U_TEXTURE);
-            uLoadIdentity();
-            uMatrixMode(U_PROJECTION);
-            uLoadIdentity();
-            uOrthof(0.0, 1, 0.0, 1, -40, 40);
-            uMatrixMode(U_MODELVIEW);
-            uLoadIdentity();
+            milk.uMatrixMode(milk.U_TEXTURE);
+            milk.uLoadIdentity();
+            milk.uMatrixMode(milk.U_PROJECTION);
+            milk.uLoadIdentity();
+            milk.uOrthof(0.0, 1, 0.0, 1, -40, 40);
+            milk.uMatrixMode(milk.U_MODELVIEW);
+            milk.uLoadIdentity();
         },
 
         RenderItems: function(pipeline, pipelineContext) {
@@ -78,17 +81,17 @@ define("Renderer", ["PerPixelMesh", "RenderTarget"], function(PerPixelMesh, Rend
         Pass2: function(pipeline, pipelineContext) {
             gl.viewport(0, 0, this.vw, this.vh);
             gl.bindTexture(gl.TEXTURE_2D, this.renderTarget.textureID[0]);
-            uMatrixMode(U_PROJECTION);
-            uLoadIdentity();
-            uOrthof(-0.5, 0.5, -0.5, 0.5, -40, 40);
+            milk.uMatrixMode(milk.U_PROJECTION);
+            milk.uLoadIdentity();
+            milk.uOrthof(-0.5, 0.5, -0.5, 0.5, -40, 40);
             gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
             gl.lineWidth(this.renderTarget.texsize < 512 ? 1 : this.renderTarget.texsize / 512.0);
             this.CompositeOutput(pipeline, pipelineContext);
 
-            uMatrixMode(U_MODELVIEW);
-            uLoadIdentity();
-            uTranslatef(-0.5, -0.5, 0);
-            uTranslatef(0.5, 0.5, 0);
+            milk.uMatrixMode(milk.U_MODELVIEW);
+            milk.uLoadIdentity();
+            milk.uTranslatef(-0.5, -0.5, 0);
+            milk.uTranslatef(0.5, 0.5, 0);
 
         },
 
@@ -111,19 +114,19 @@ define("Renderer", ["PerPixelMesh", "RenderTarget"], function(PerPixelMesh, Rend
                 gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.REPEAT);
             }
 
-            uMatrixMode(U_TEXTURE);
-            uLoadIdentity();
+            milk.uMatrixMode(milk.U_TEXTURE);
+            milk.uLoadIdentity();
             gl.enable(gl.BLEND);
             gl.blendFunc(gl.SRC_ALPHA, gl.ZERO);
 
-            uColor4f(1.0, 1.0, 1.0, pipeline.screenDecay);
+            milk.uColor4f(1.0, 1.0, 1.0, pipeline.screenDecay);
 
-            uEnableClientState(U_VERTEX_ARRAY);
-            uEnableClientState(U_TEXTURE_COORD_ARRAY);
-            uDisableClientState(U_COLOR_ARRAY);
+            milk.uEnableClientState(milk.U_VERTEX_ARRAY);
+            milk.uEnableClientState(milk.U_TEXTURE_COORD_ARRAY);
+            milk.uDisableClientState(milk.U_COLOR_ARRAY);
 
-            uVertexPointer(2, gl.FLOAT, 0, this.pbuf);
-            uTexCoordPointer(2, gl.FLOAT, 0, this.tbuf);
+            milk.uVertexPointer(2, gl.FLOAT, 0, this.pbuf);
+            milk.uTexCoordPointer(2, gl.FLOAT, 0, this.tbuf);
 
             function round(val, n) {
                 return Math.round(val * Math.pow(10, n)) / Math.pow(10, n);
@@ -149,12 +152,12 @@ define("Renderer", ["PerPixelMesh", "RenderTarget"], function(PerPixelMesh, Rend
                     gl.bufferData(gl.ARRAY_BUFFER, this.t, gl.STATIC_DRAW);
                     gl.bindBuffer(gl.ARRAY_BUFFER, this.pbuf);
                     gl.bufferData(gl.ARRAY_BUFFER, this.p, gl.STATIC_DRAW);
-                    uDrawArrays(gl.TRIANGLE_STRIP, 0, this.mesh.width * 2);
+                    milk.uDrawArrays(gl.TRIANGLE_STRIP, 0, this.mesh.width * 2);
                 }
             } else
                 print("not static per pixel");
 
-            uDisableClientState(U_TEXTURE_COORD_ARRAY);
+            milk.uDisableClientState(milk.U_TEXTURE_COORD_ARRAY);
             gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 
         },
@@ -166,12 +169,12 @@ define("Renderer", ["PerPixelMesh", "RenderTarget"], function(PerPixelMesh, Rend
             gl.cullFace(gl.BACK);
             gl.clearColor(0, 0, 0, 0);
             gl.viewport(0, 0, w, h);
-            uMatrixMode(U_TEXTURE);
-            uLoadIdentity();
-            uMatrixMode(U_PROJECTION);
-            uLoadIdentity();
-            uMatrixMode(U_MODELVIEW);
-            uLoadIdentity();
+            milk.uMatrixMode(milk.U_TEXTURE);
+            milk.uLoadIdentity();
+            milk.uMatrixMode(milk.U_PROJECTION);
+            milk.uLoadIdentity();
+            milk.uMatrixMode(milk.U_MODELVIEW);
+            milk.uLoadIdentity();
             gl.enable(gl.BLEND);
             gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
             gl.clear(gl.COLOR_BUFFER_BIT);
@@ -180,14 +183,14 @@ define("Renderer", ["PerPixelMesh", "RenderTarget"], function(PerPixelMesh, Rend
         },
 
         CompositeOutput: function(pipeline, pipelineContext) {
-            uMatrixMode(U_TEXTURE);
-            uLoadIdentity();
-            uMatrixMode(U_MODELVIEW);
-            uLoadIdentity();
+            milk.uMatrixMode(milk.U_TEXTURE);
+            milk.uLoadIdentity();
+            milk.uMatrixMode(milk.U_MODELVIEW);
+            milk.uLoadIdentity();
 
             gl.enable(gl.BLEND);
             gl.blendFunc(gl.ONE, gl.ZERO);
-            uColor4f(1.0, 1.0, 1.0, 1.0);
+            milk.uColor4f(1.0, 1.0, 1.0, 1.0);
 
             gl.bindBuffer(gl.ARRAY_BUFFER, this.cotbuf);
             gl.bufferData(gl.ARRAY_BUFFER, this.cot, gl.STATIC_DRAW);
@@ -195,15 +198,15 @@ define("Renderer", ["PerPixelMesh", "RenderTarget"], function(PerPixelMesh, Rend
             gl.bindBuffer(gl.ARRAY_BUFFER, this.copbuf);
             gl.bufferData(gl.ARRAY_BUFFER, this.cop, gl.STATIC_DRAW);
 
-            uEnableClientState(U_VERTEX_ARRAY);
-            uDisableClientState(U_COLOR_ARRAY);
-            uEnableClientState(U_TEXTURE_COORD_ARRAY);
+            milk.uEnableClientState(milk.U_VERTEX_ARRAY);
+            milk.uDisableClientState(milk.U_COLOR_ARRAY);
+            milk.uEnableClientState(milk.U_TEXTURE_COORD_ARRAY);
 
-            uVertexPointer(2, gl.FLOAT, 0, this.copbuf);
-            uTexCoordPointer(2, gl.FLOAT, 0, this.cotbuf);
+            milk.uVertexPointer(2, gl.FLOAT, 0, this.copbuf);
+            milk.uTexCoordPointer(2, gl.FLOAT, 0, this.cotbuf);
 
-            uDrawArrays(gl.TRIANGLE_FAN, 0, 4);
-            uDisableClientState(U_TEXTURE_COORD_ARRAY);
+            milk.uDrawArrays(gl.TRIANGLE_FAN, 0, 4);
+            milk.uDisableClientState(milk.U_TEXTURE_COORD_ARRAY);
             gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 
             for (var pos = 0; pos < pipeline.compositeDrawables; pos++)

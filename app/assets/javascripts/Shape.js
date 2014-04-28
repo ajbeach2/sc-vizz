@@ -1,6 +1,9 @@
-define('Shape', ["RenderItem"], function(RenderItem) {
+define('Shape', ["RenderItem", "Milk", "ShapeFrameVariablePool"], function(RenderItem, Milk, ShapeFrameVariablePool) {
     Shape.prototype = new RenderItem();
     Shape.constructor = Shape;
+
+    var milk = Milk.getInstance();
+    var gl = milk.gl;
 
     function Shape(literal, initialQs) {
         this.sides = 4;
@@ -37,8 +40,7 @@ define('Shape', ["RenderItem"], function(RenderItem) {
         this.init_code = function() {};
         this.per_frame_code = function() {};
 
-        this._super(literal);
-
+        RenderItem.call(this, literal);
         this.initialVals = new ShapeFrameVariablePool();
         this.initialVals.pushOutputs(this);
 
@@ -103,22 +105,22 @@ define('Shape', ["RenderItem"], function(RenderItem) {
 
             if (this.textured) {
                 if (this.ImageUrl != "") {
-                    var tex = textures[this.ImageUrl];
+                    var tex = milk.textures[this.ImageUrl];
                     gl.bindTexture(gl.TEXTURE_2D, tex);
                     context.aspectRatio = 1.0;
                 }
 
-                uMatrixMode(U_TEXTURE);
-                uPushMatrix();
-                uLoadIdentity();
+                milk.uMatrixMode(milk.U_TEXTURE);
+                milk.uPushMatrix();
+                milk.uLoadIdentity();
 
-                uEnableClientState(U_VERTEX_ARRAY);
-                uEnableClientState(U_COLOR_ARRAY);
-                uEnableClientState(U_TEXTURE_COORD_ARRAY);
+                milk.uEnableClientState(milk.U_VERTEX_ARRAY);
+                milk.uEnableClientState(milk.U_COLOR_ARRAY);
+                milk.uEnableClientState(milk.U_TEXTURE_COORD_ARRAY);
 
-                uVertexPointer(2, gl.FLOAT, 0, this.pointsbuf);
-                uColorPointer(4, gl.FLOAT, 0, this.colorbuf);
-                uTexCoordPointer(2, gl.FLOAT, 0, this.texbuf);
+                milk.uVertexPointer(2, gl.FLOAT, 0, this.pointsbuf);
+                milk.uColorPointer(4, gl.FLOAT, 0, this.colorbuf);
+                milk.uTexCoordPointer(2, gl.FLOAT, 0, this.texbuf);
 
                 this.colors[0] = this.r;
                 this.colors[1] = this.g;
@@ -151,18 +153,18 @@ define('Shape', ["RenderItem"], function(RenderItem) {
                 gl.bindBuffer(gl.ARRAY_BUFFER, this.pointsbuf);
                 gl.bufferData(gl.ARRAY_BUFFER, this.points, gl.STATIC_DRAW);
 
-                uDrawArrays(gl.TRIANGLE_FAN, 0, this.sides + 2);
+                milk.uDrawArrays(gl.TRIANGLE_FAN, 0, this.sides + 2);
 
-                uDisableClientState(U_TEXTURE_COORD_ARRAY);
-                uPopMatrix();
-                uMatrixMode(U_MODELVIEW);
+                milk.uDisableClientState(milk.U_TEXTURE_COORD_ARRAY);
+                milk.uPopMatrix();
+                milk.uMatrixMode(milk.U_MODELVIEW);
 
             } else {
-                uEnableClientState(U_VERTEX_ARRAY);
-                uEnableClientState(U_COLOR_ARRAY);
-                uDisableClientState(U_TEXTURE_COORD_ARRAY);
-                uVertexPointer(2, gl.FLOAT, 0, this.pointsbuf);
-                uColorPointer(4, gl.FLOAT, 0, this.colorbuf);
+                milk.uEnableClientState(milk.U_VERTEX_ARRAY);
+                milk.uEnableClientState(milk.U_COLOR_ARRAY);
+                milk.uDisableClientState(U_TEXTURE_COORD_ARRAY);
+                milk.uVertexPointer(2, gl.FLOAT, 0, this.pointsbuf);
+                milk.uColorPointer(4, gl.FLOAT, 0, this.colorbuf);
 
                 this.colors[0] = this.r;
                 this.colors[1] = this.g;
@@ -187,18 +189,18 @@ define('Shape', ["RenderItem"], function(RenderItem) {
                 gl.bindBuffer(gl.ARRAY_BUFFER, this.pointsbuf);
                 gl.bufferData(gl.ARRAY_BUFFER, this.points, gl.STATIC_DRAW);
 
-                uDrawArrays(gl.TRIANGLE_FAN, 0, this.sides + 2);
+                milk.uDrawArrays(gl.TRIANGLE_FAN, 0, this.sides + 2);
 
             }
             if (this.thickOutline)
                 gl.lineWidth(context.texsize < 512 ? 1 : 2 * context.texsize / 512);
 
 
-            uEnableClientState(U_VERTEX_ARRAY);
-            uDisableClientState(U_COLOR_ARRAY);
-            uVertexPointer(2, gl.FLOAT, 0, this.points2buf);
+            milk.uEnableClientState(milk.U_VERTEX_ARRAY);
+            milk.uDisableClientState(milk.U_COLOR_ARRAY);
+            milk.uVertexPointer(2, gl.FLOAT, 0, this.points2buf);
 
-            uColor4f(this.border_r, this.border_g, this.border_b, this.border_a * this.masterAlpha);
+            milk.uColor4f(this.border_r, this.border_g, this.border_b, this.border_a * this.masterAlpha);
 
             for (var i = 0; i < this.sides; i++) {
                 t = (i - 1) / this.sides;
@@ -209,7 +211,7 @@ define('Shape', ["RenderItem"], function(RenderItem) {
             gl.bindBuffer(gl.ARRAY_BUFFER, this.points2buf);
             gl.bufferData(gl.ARRAY_BUFFER, this.points2, gl.STATIC_DRAW);
 
-            uDrawArrays(gl.LINE_LOOP, 0, this.sides);
+            milk.uDrawArrays(gl.LINE_LOOP, 0, this.sides);
             if (this.thickOutline)
                 gl.lineWidth(context.texsize < 512 ? 1 : context.texsize / 512);
         }
