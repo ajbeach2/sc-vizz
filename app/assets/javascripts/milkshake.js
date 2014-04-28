@@ -21,7 +21,6 @@
 
 window.onload = function() {
 
-
     require([
         "Shaker",
         "SoundCloudAudio",
@@ -51,7 +50,6 @@ window.onload = function() {
             }
 
         }
-
         var requestAnimFrame = window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame ||
                 function(callback, element) {
                     window.setTimeout(callback, 1000 / 60);
@@ -61,9 +59,6 @@ window.onload = function() {
             shaker.renderFrame.call(shaker);
             requestAnimFrame(animationLoop, canvas);
         }
-
         shake('canvas');
-
-
     });
 }

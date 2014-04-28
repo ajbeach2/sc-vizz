@@ -18,8 +18,6 @@
  * See 'LICENSE.txt' included within this release
  *
  */
-
-
 define("MilkDropPreset", ["PresetFrameVariablePool", "PresetPixelVariablePool",
     "Darken", "Brighten", "Solarize", "Invert", "DarkenCenter",
     "MotionVectors", "Border", "MilkdropWaveform", "RenderItem", "CustomWaveform", "Shape"
@@ -519,8 +517,6 @@ define("MilkDropPreset", ["PresetFrameVariablePool", "PresetPixelVariablePool",
                     this.outputs.y_mesh[x][y] -= this.outputs.dy_mesh[x][y];
 
         }
-
     }
-
     return MilkDropPreset;
 });
