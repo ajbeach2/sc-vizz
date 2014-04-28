@@ -211,7 +211,6 @@ define("Renderer", ["PerPixelMesh", "RenderTarget", "Milk"], function(PerPixelMe
 
             for (var pos = 0; pos < pipeline.compositeDrawables; pos++)
                 pipeline.compositeDrawables[pos].Draw(this.renderContext);
-
         }
     }
 

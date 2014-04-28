@@ -66,6 +66,12 @@ define("Milk", function() {
 
     Milk.prototype = {
 
+
+        resizeCanvas: function() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        },
+
         initGL: function(callback) {
 
             var vertexShader = this.loadShader(this.gl.VERTEX_SHADER,
