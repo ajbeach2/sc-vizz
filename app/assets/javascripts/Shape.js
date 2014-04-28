@@ -162,7 +162,7 @@ define('Shape', ["RenderItem", "Milk", "ShapeFrameVariablePool"], function(Rende
             } else {
                 milk.uEnableClientState(milk.U_VERTEX_ARRAY);
                 milk.uEnableClientState(milk.U_COLOR_ARRAY);
-                milk.uDisableClientState(U_TEXTURE_COORD_ARRAY);
+                milk.uDisableClientState(milk.U_TEXTURE_COORD_ARRAY);
                 milk.uVertexPointer(2, gl.FLOAT, 0, this.pointsbuf);
                 milk.uColorPointer(4, gl.FLOAT, 0, this.colorbuf);
 
