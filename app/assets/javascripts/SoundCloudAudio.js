@@ -1,10 +1,11 @@
 define("SoundCloudAudio",
     function() {
 
-        function SoundCloudAudio(shaker) {
+        function SoundCloudAudio(waveDataFunc, context) {
             this.clientId = '076fcc61717065186c152a88c3bb4f91';
             this.initSoundCloudClient();
-            this.shaker = shaker;
+            this.waveDataFunc = waveDataFunc;
+            this.context = context;
         }
 
         SoundCloudAudio.prototype = {
@@ -31,7 +32,7 @@ define("SoundCloudAudio",
                                 left[i] = parseFloat(left[i]);
                                 right[i] = parseFloat(right[i]);
                             }
-                            that.shaker.music.addPCM(left, right);
+                            that.waveDataFunc.call(that.context, left, right);
                         }
                     });
                     audio.play();

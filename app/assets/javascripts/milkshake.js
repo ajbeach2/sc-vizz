@@ -38,7 +38,7 @@ window.onload = function() {
             try {
                 milk.initGL(function() {
                     shaker = new Shaker();
-                    audio = new SoundCloudAudio(shaker);
+                    audio = new SoundCloudAudio(shaker.music.addPCM, shaker.music);
                     animationLoop();
                     setInterval(function() {
                         shaker.selectNext(true);
@@ -46,7 +46,6 @@ window.onload = function() {
                 });
             } catch (e) {
                 console.log(e.stack);
-                canvas.outerHTML = "<div id='" + elementId + "' style='padding:20px;'>" + canvas.innerHTML + "</div>";
             }
 
         }
