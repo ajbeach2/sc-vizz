@@ -8,6 +8,8 @@ body {
 #player-container {
     width: 100%;
     z-index: 200;
+    position: absolute;
+    top: 20px;
 }
 #player-container #player-inner #player-controls:hover #player-timebar {
     display: block;

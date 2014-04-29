@@ -8,6 +8,7 @@ define("SoundCloudAudio",
             this.context = context;
 
             this.progress = document.getElementById('player-progress-playing');
+            this.loading = document.getElementById('player-progress-loading');
         }
 
         SoundCloudAudio.prototype = {
@@ -27,6 +28,11 @@ define("SoundCloudAudio",
                 }, function(audio) {
                     audio.load({
 
+                        whileloading: function() {
+                            var percent = (((this.bytesLoaded / this.bytesTotal) * 10000) | 0) / 100;
+                            console.log(this.loading);
+                            that.loading.style.width = percent + "%";
+                        },
 
                         whileplaying: function() {
                             var left = this.waveformData.left;
