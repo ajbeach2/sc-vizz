@@ -30,7 +30,6 @@ define("SoundCloudAudio",
 
                         whileloading: function() {
                             var percent = (((this.bytesLoaded / this.bytesTotal) * 10000) | 0) / 100;
-                            console.log(this.loading);
                             that.loading.style.width = percent + "%";
                         },
 

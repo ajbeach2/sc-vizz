@@ -3,8 +3,6 @@ define('Filter', ["RenderItem", "Milk"], function(RenderItem, Milk) {
     Filter.constructor = Filter;
 
     var milk = Milk.getInstance();
-
-    console.log(milk);
     var gl = milk.gl;
 
     function Filter(literal) {
