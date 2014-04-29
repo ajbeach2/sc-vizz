@@ -5,7 +5,6 @@
     = stylesheet_link_tag    "application", media: "all"
     / TODO: move these
     / External assets
-    / %script{"data-main" => "assets/milkshake.js", src: "assets/require.js"}
-    = requirejs_include_tag "milkshake"
+    = requirejs_include_tag "application"
     = javascript_include_tag "http://connect.soundcloud.com/sdk.js"
     = yield
