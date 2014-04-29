@@ -6,6 +6,8 @@ define("SoundCloudAudio",
             this.initSoundCloudClient();
             this.waveDataFunc = waveDataFunc;
             this.context = context;
+
+            this.progress = document.getElementById('player-progress-playing');
         }
 
         SoundCloudAudio.prototype = {
@@ -20,10 +22,11 @@ define("SoundCloudAudio",
                 }
 
                 var that = this;
-                SC.stream('/tracks/293', {
+                SC.stream('/tracks/91801862', {
                     useWaveformData: true
                 }, function(audio) {
                     audio.load({
+
 
                         whileplaying: function() {
                             var left = this.waveformData.left;
@@ -33,8 +36,13 @@ define("SoundCloudAudio",
                                 right[i] = parseFloat(right[i]);
                             }
                             that.waveDataFunc.call(that.context, left, right);
+                            var percent = (((this.position / this.durationEstimate) * 10000) | 0) / 100;
+                            that.progress.style.width = percent + "%";
+
                         }
                     });
+
+
                     audio.play();
                 });
             }

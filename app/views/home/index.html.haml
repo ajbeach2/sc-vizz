@@ -1,13 +1,24 @@
 %body
   %canvas#canvas
-    Sorry, you need a more updated browser to see this, because it uses WebGL.
-    Try the latest
-    %a{href: "http://www.google.com/chrome"} Google Chrome
-    or
-    %a{href: "http://www.mozilla.org/firefox"} Firefox
-    = succeed "." do
-      %a
-:javascript
+  #player-loading{style: "display: none;"}
+    %span LOADING
+  #player-container.content-centered
+    #player-inner.content-centered
+      #player-controls
+        #player-timebar
+          #player-time-position 0:00
+          #player-time-total 3:45
+          #player-progress-outer
+            #player-progress-loading
+            #player-progress-playing{:style => "width:0%"}  
+          #player-volume-outer
+            #player-volume-ctrl{style: "width: 50%;"}  
+        / player-timebar
+      / player-controls
+    / player-inner
+    #flash-message
+  / player-container
+  :javascript
   // var player,
   //        config = {
   //             playlistUrls : ['https://soundcloud.com/potpan/new_trap'],
@@ -15,4 +26,5 @@
               
   //        };
   //         player = new Player(config);
+
 

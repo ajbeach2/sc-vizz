@@ -20,7 +20,6 @@
  */
 
 window.onload = function() {
-
     require([
         "Shaker",
         "SoundCloudAudio",
