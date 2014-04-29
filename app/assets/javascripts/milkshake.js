@@ -38,7 +38,7 @@ window.onload = function() {
             try {
                 milk.initGL(function() {
                     shaker = new Shaker();
-                    audio = new SoundCloudAudio();
+                    audio = new SoundCloudAudio(shaker);
                     animationLoop();
                     setInterval(function() {
                         shaker.selectNext(true);
