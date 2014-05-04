@@ -1,0 +1,109 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+
+
+ */
+
+/* line 5, /Users/abeach/Workspace/sc-vizz/app/assets/stylesheets/home.css.scss */
+body {
+  margin: 0px;
+}
+
+/* line 8, /Users/abeach/Workspace/sc-vizz/app/assets/stylesheets/home.css.scss */
+#player-container {
+  width: 100%;
+  z-index: 200;
+  position: absolute;
+  top: 20px;
+}
+
+/* line 14, /Users/abeach/Workspace/sc-vizz/app/assets/stylesheets/home.css.scss */
+#player-container #player-inner #player-controls:hover #player-timebar {
+  display: block;
+}
+
+/* line 17, /Users/abeach/Workspace/sc-vizz/app/assets/stylesheets/home.css.scss */
+#player-container #player-inner #player-controls #player-timebar {
+  background: #111;
+  border: 1px solid #272727;
+  font-size: 11px;
+  height: 33px;
+  line-height: 33px;
+  position: relative;
+  width: 700px;
+  z-index: 3;
+  color: #eee;
+  margin: auto;
+}
+
+/* line 29, /Users/abeach/Workspace/sc-vizz/app/assets/stylesheets/home.css.scss */
+#player-container #player-inner #player-controls #player-timebar #player-time-position {
+  font-weight: 700;
+  left: 0px;
+  position: absolute;
+  text-align: right;
+  width: 35px;
+  z-index: 10;
+}
+
+/* line 37, /Users/abeach/Workspace/sc-vizz/app/assets/stylesheets/home.css.scss */
+#player-container #player-inner #player-controls #player-timebar #player-time-total {
+  left: 574px;
+  position: absolute;
+  z-index: 10;
+  font-weight: bold;
+}
+
+/* line 43, /Users/abeach/Workspace/sc-vizz/app/assets/stylesheets/home.css.scss */
+#player-container #player-inner #player-controls #player-timebar #player-volume-outer {
+  cursor: pointer;
+  position: absolute;
+  right: 10px;
+  top: 11px;
+  border: 1px solid #aaa;
+  width: 70px;
+  line-height: 8px;
+}
+
+/* line 52, /Users/abeach/Workspace/sc-vizz/app/assets/stylesheets/home.css.scss */
+#player-container #player-inner #player-controls #player-timebar #player-volume-outer #player-volume-ctrl {
+  height: 8px;
+  background: orange;
+}
+
+/* line 56, /Users/abeach/Workspace/sc-vizz/app/assets/stylesheets/home.css.scss */
+#player-container #player-inner #player-controls #player-timebar #player-progress-outer {
+  border: 1px solid #333;
+  height: 8px;
+  left: 50px;
+  position: absolute;
+  top: 11px;
+  width: 500px;
+}
+
+/* line 64, /Users/abeach/Workspace/sc-vizz/app/assets/stylesheets/home.css.scss */
+#player-container #player-inner #player-controls #player-timebar #player-progress-outer #player-progress-playing {
+  background: #84c441;
+  height: 8px;
+  left: 0;
+  position: absolute;
+  z-index: 9;
+}
+
+/* line 71, /Users/abeach/Workspace/sc-vizz/app/assets/stylesheets/home.css.scss */
+#player-container #player-inner #player-controls #player-timebar #player-progress-outer #player-progress-loading {
+  background: #333;
+  height: 8px;
+  left: 0;
+  position: absolute;
+  z-index: 5;
+  cursor: pointer;
+}
