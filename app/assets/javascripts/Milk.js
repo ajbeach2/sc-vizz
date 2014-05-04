@@ -112,10 +112,21 @@ define("Milk", function() {
             var shaderProgram = this.gl.createProgram();
             this.gl.attachShader(shaderProgram, vertexShader);
             this.gl.attachShader(shaderProgram, fragmentShader);
+
+            var vertices = new Float32Array([0.0, 0.0, 0.0]),
+                vertexBuffer = this.gl.createBuffer();
+            this.gl.bindBuffer(this.gl.ARRAY_BUFFER, vertexBuffer);
+            this.gl.bufferData(this.gl.ARRAY_BUFFER, vertices, this.gl.STATIC_DRAW);
+            this.gl.bindAttribLocation(shaderProgram, 0, 'a_position');
+            this.gl.vertexAttribPointer(0, 3, this.gl.FLOAT, false, 0, 0);
+            this.gl.enableVertexAttribArray(0);
+
+
             this.gl.linkProgram(shaderProgram);
             if (!this.gl.getProgramParameter(shaderProgram, this.gl.LINK_STATUS))
                 throw Error("Unable to initialize the shader program.");
             this.gl.useProgram(shaderProgram);
+
 
             this.vertexPos = this.gl.getAttribLocation(shaderProgram, "a_position");
             this.colorPos = this.gl.getAttribLocation(shaderProgram, "a_color");
