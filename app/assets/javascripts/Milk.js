@@ -118,11 +118,10 @@ define("Milk", function() {
             uniform bool enable_s_texture; \
             void main() { \
               if (enable_s_texture) \
-                gl_FragColor = vec4(1,0,0,1); \
+                gl_FragColor = v_color * texture2D(s_texture, v_texCoord.st); \
               else \
                 gl_FragColor = vec4(1,0,0,1); \
             }");
-
 
 
             var shaderProgram = this.gl.createProgram();
