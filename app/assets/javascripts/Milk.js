@@ -74,6 +74,28 @@ define("Milk", function() {
 
         initGL: function(callback) {
 
+            //   var vertexShader = this.loadShader(this.gl.VERTEX_SHADER,
+            //       "precision mediump float; \
+            // attribute vec4 a_position; \
+            // attribute vec4 a_texCoord; \
+            // varying vec4 v_texCoord; \
+            // attribute vec4 a_color; \
+            // uniform vec4 u_color; \
+            // varying vec4 v_color; \
+            // uniform bool enable_v_color; \
+            // uniform float u_pointsize; \
+            // uniform mat4 mvp_matrix; \
+            // uniform mat4 tx_matrix; \
+            // void main() { \
+            //   gl_Position = mvp_matrix * a_position; \
+            //   v_texCoord = tx_matrix * a_texCoord; \
+            //   if (enable_v_color) \
+            //     v_color = a_color; \
+            //   else \
+            //     v_color = u_color; \
+            //   gl_PointSize = u_pointsize; \
+            // }");
+
             var vertexShader = this.loadShader(this.gl.VERTEX_SHADER,
                 "precision mediump float; \
           attribute vec4 a_position; \
@@ -90,25 +112,11 @@ define("Milk", function() {
             gl_Position = mvp_matrix * a_position; \
             v_texCoord = tx_matrix * a_texCoord; \
             if (enable_v_color) \
-              v_color = a_color; \
+              v_color = vec4(1,0,0,1); \
             else \
-              v_color = u_color; \
+              v_color = vec4(1,0,0,1); \
             gl_PointSize = u_pointsize; \
           }");
-
-            // var fragmentShader = this.loadShader(this.gl.FRAGMENT_SHADER,
-            //     "precision mediump float; \
-            //     varying vec4 v_texCoord; \
-            //     uniform sampler2D s_texture; \
-            // varying vec4 v_color; \
-            // uniform bool enable_s_texture; \
-            // void main() { \
-            //   if (enable_s_texture) \
-            //     gl_FragColor = v_color * texture2D(s_texture, v_texCoord.st); \
-            //   else \
-            //     gl_FragColor = v_color; \
-            // }");
-
 
             var fragmentShader = this.loadShader(this.gl.FRAGMENT_SHADER,
                 "precision mediump float; \
@@ -120,7 +128,7 @@ define("Milk", function() {
               if (enable_s_texture) \
                 gl_FragColor = v_color * texture2D(s_texture, v_texCoord.st); \
               else \
-                gl_FragColor = vec4(1,0,0,1); \
+                gl_FragColor = v_color; \
             }");
 
 
