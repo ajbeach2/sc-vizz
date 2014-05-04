@@ -96,39 +96,61 @@ define("Milk", function() {
             gl_PointSize = u_pointsize; \
           }");
 
+            // var fragmentShader = this.loadShader(this.gl.FRAGMENT_SHADER,
+            //     "precision mediump float; \
+            //     varying vec4 v_texCoord; \
+            //     uniform sampler2D s_texture; \
+            // varying vec4 v_color; \
+            // uniform bool enable_s_texture; \
+            // void main() { \
+            //   if (enable_s_texture) \
+            //     gl_FragColor = v_color * texture2D(s_texture, v_texCoord.st); \
+            //   else \
+            //     gl_FragColor = v_color; \
+            // }");
+
+
             var fragmentShader = this.loadShader(this.gl.FRAGMENT_SHADER,
                 "precision mediump float; \
-          varying vec4 v_texCoord; \
-          uniform sampler2D s_texture; \
-      varying vec4 v_color; \
-      uniform bool enable_s_texture; \
-      void main() { \
-        if (enable_s_texture) \
-          gl_FragColor = v_color * texture2D(s_texture, v_texCoord.st); \
-        else \
-          gl_FragColor = v_color; \
-      }");
+                varying vec4 v_texCoord; \
+                uniform sampler2D s_texture; \
+            varying vec4 v_color; \
+            uniform bool enable_s_texture; \
+            void main() { \
+              if (enable_s_texture) \
+                gl_FragColor = vec4(1,0,0,1); \
+              else \
+                gl_FragColor = vec4(1,0,0,1); \
+            }");
+
+
 
             var shaderProgram = this.gl.createProgram();
             this.gl.attachShader(shaderProgram, vertexShader);
             this.gl.attachShader(shaderProgram, fragmentShader);
 
+
+
             var vertices = new Float32Array([0.0, 0.0, 0.0]),
                 vertexBuffer = this.gl.createBuffer();
             this.gl.bindBuffer(this.gl.ARRAY_BUFFER, vertexBuffer);
             this.gl.bufferData(this.gl.ARRAY_BUFFER, vertices, this.gl.STATIC_DRAW);
+
             this.gl.bindAttribLocation(shaderProgram, 0, 'a_position');
             this.gl.vertexAttribPointer(0, 3, this.gl.FLOAT, false, 0, 0);
             this.gl.enableVertexAttribArray(0);
-
-
             this.gl.linkProgram(shaderProgram);
+
+
             if (!this.gl.getProgramParameter(shaderProgram, this.gl.LINK_STATUS))
                 throw Error("Unable to initialize the shader program.");
             this.gl.useProgram(shaderProgram);
 
+            console.log(this.gl.getError());
+
 
             this.vertexPos = this.gl.getAttribLocation(shaderProgram, "a_position");
+
             this.colorPos = this.gl.getAttribLocation(shaderProgram, "a_color");
             this.texCoordPos = this.gl.getAttribLocation(shaderProgram, "a_texCoord");
             this.ucolorloc = this.gl.getUniformLocation(shaderProgram, "u_color");
