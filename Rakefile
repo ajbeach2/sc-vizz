@@ -1,6 +1,12 @@
-# Add your own tasks in files placed in lib/tasks ending in .rake,
-# for example lib/tasks/capistrano.rake, and they will automatically be available to Rake.
+APP_FILE  = 'application.rb'
+APP_CLASS = 'App'
 
-require File.expand_path('../config/application', __FILE__)
+require 'sinatra/assetpack/rake'
+require 'rake/testtask'
+require 'sinatra/export/rake'
 
-Vizz::Application.load_tasks
+Rake::TestTask.new do |t|
+  t.libs << "test"
+  t.test_files = FileList['test/test*.rb']
+  t.verbose = true
+end
