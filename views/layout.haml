@@ -4,5 +4,7 @@
     %meta{:charset => "utf-8"}/
     %title
       = yield_content(:title)
+    %link{:type => "text/css", :rel => "stylesheet", :href => 'css/home.css'}
     %script{:src => 'http://connect.soundcloud.com/sdk.js'}
+    %script{"data-main" => "js/application.js", :src => "js/lib/require.js"}
     = yield
