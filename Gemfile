@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby "2.1.1"
+ruby "2.2.0"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.4'
@@ -34,10 +34,10 @@ group :development do
   gem 'sqlite3'
 end
 
-group :production do 
-  gem 'rails_serve_static_assets'
-  gem 'pg'
-end
+# group :production do 
+#   gem 'rails_serve_static_assets'
+#   gem 'pg'
+# end
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
