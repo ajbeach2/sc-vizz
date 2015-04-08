@@ -4,19 +4,5 @@
     %meta{:charset => "utf-8"}/
     %title
       = yield_content(:title)
-    %script{:src => 'js/lib/webgl-utils.js'}
-    %script{:src => 'js/lib/webgl-debug.js'}
-    %script{:src => 'js/lib/cuon-utils.js'}
+    %script{:src => 'http://connect.soundcloud.com/sdk.js'}
     = yield
-
-
-/ !!!
-/ %html
-/   %head
-/     %title Vizz 
-/     = stylesheet_link_tag    "application", media: "all"
-/     / TODO: move these
-/     / External assets
-/     = requirejs_include_tag "application"
-/     = javascript_include_tag "http://connect.soundcloud.com/sdk.js"
-/     = yield
