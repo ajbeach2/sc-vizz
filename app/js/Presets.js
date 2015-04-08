@@ -90,7 +90,7 @@ define('Presets', function() {
             sides: 4,
             thickOutline: 0,
             textured: 1,
-            ImageUrl: "title.png",
+            ImageUrl: "images/title.png",
             x: 0.5,
             y: 0.5,
             rad: 1.0,

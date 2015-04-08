@@ -60,7 +60,7 @@ define("Milk", function() {
         this.enablevcoloc;
 
         this.textures = {};
-        this.texture_list = ["title.png"];
+        this.texture_list = ["images/title.png"];
         this.texloads = 0;
     }
 
