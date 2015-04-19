@@ -34,6 +34,7 @@ class App < Sinatra::Base
     css_compression :sass
   end
 
+
   error RuntimeError do
     status 500
     "A RuntimeError occured"
